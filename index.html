@@ -240,13 +240,13 @@
     <p class="small">This check runs on your phone and nothing is sent or saved anywhere. It only looks at the layout, not the language. Please practise with made-up examples, not a real person&rsquo;s private words. For an English-language form, no brackets are needed.</p>
   </div>
 
-  <h2>Before the writer presses send</h2>
-  <label class="tick"><input type="checkbox" class="chk"> <span>Choose the right language, and type the right champion code and your own writer code.</span></label>
-  <label class="tick"><input type="checkbox" class="chk"> <span>Make sure every message has its English meaning in round brackets at the end of the same line.</span></label>
+  <h2>Before you press send</h2>
+  <label class="tick"><input type="checkbox" class="chk"> <span>Choose the language you are writing in, then type your champion's code and your own writer code.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>Add the English meaning in round brackets at the end of every message, on the same line.</span></label>
   <label class="tick"><input type="checkbox" class="chk"> <span>Write each meaning as a clear, simple sentence in your own words.</span></label>
-  <label class="tick"><input type="checkbox" class="chk"> <span>Write everything yourself. Do not use a translation or AI tool, and do not copy.</span></label>
-  <label class="tick"><input type="checkbox" class="chk"> <span>Leave out real names, phone numbers and addresses.</span></label>
-  <label class="tick"><input type="checkbox" class="chk"> <span>Send this form only once.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>Write everything yourself. Do not use a translation tool or AI, and do not copy from anywhere.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>Do not include real names, phone numbers or addresses.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>Send the form only once.</span></label>
   <div id="ready" aria-live="polite"></div>
 
   <h2>Four habits that help</h2>
@@ -406,7 +406,7 @@ var ticks = document.querySelectorAll('.chk'), readyEl = document.getElementById
 function updateReady() {
   var all = true;
   Array.prototype.forEach.call(ticks, function (t) { if (!t.checked) all = false; });
-  readyEl.textContent = all ? 'All six ticked. The form is ready to send.' : '';
+  readyEl.textContent = all ? 'All six are ticked. You are ready to send the form.' : '';
 }
 Array.prototype.forEach.call(ticks, function (t) { t.addEventListener('change', updateReady); });
 
