@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Teach Zuzi forms</title>
+<style>
+  :root {
+    --plum: #2B1D3A; --cream: #FBF6EF; --sand: #F1E7DA; --rust: #A63A19; --teal: #1F6F6A;
+    --text: #4A3F57; --card: #FFFDF9; --line: #E3D6C6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--text); font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px 48px; }
+  header { background: var(--plum); color: #F3ECF7; padding: 40px 0 36px; }
+  header .wrap { padding-bottom: 0; }
+  .eyebrow { margin: 0 0 8px; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #F4B393; }
+  h1 { margin: 0 0 12px; font-size: 40px; line-height: 1.1; color: #FBF6EF; }
+  header p.lead { margin: 0; font-size: 18px; max-width: 640px; color: #D9CCE3; }
+  h2 { font-size: 24px; line-height: 1.2; color: var(--plum); margin: 36px 0 14px; }
+  .steps { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin: 0; padding: 0; list-style: none; }
+  .steps li { background: var(--sand); border-radius: 14px; padding: 14px 16px; font-size: 16px; }
+  .steps b { color: var(--plum); }
+  .codebox { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 16px; }
+  .codebox label { display: block; font-weight: 700; color: var(--plum); margin-bottom: 6px; }
+  .codebox input { width: 100%; max-width: 280px; font-size: 18px; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; background: #fff; color: var(--plum); }
+  .codebox input:focus { outline: 3px solid #F4B393; border-color: var(--rust); }
+  .codebox p { margin: 8px 0 0; font-size: 14px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .card h3 { margin: 0; font-size: 22px; line-height: 1.2; color: var(--plum); }
+  .card p { margin: 0; font-size: 16px; }
+  .tag { align-self: flex-start; font-size: 13px; font-weight: 700; color: #fff; background: var(--rust); border-radius: 999px; padding: 3px 10px; }
+  .tag.soon { background: #6B5780; }
+  .actions { margin-top: auto; padding-top: 6px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border-radius: 12px; font-size: 16px; font-weight: 700; text-decoration: none; border: 2px solid var(--teal); cursor: pointer; font-family: inherit; }
+  .btn.primary { background: var(--teal); color: #fff; flex: 1 1 100%; }
+  .btn.secondary { background: transparent; color: var(--teal); flex: 1 1 auto; }
+  .btn:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; }
+  .btn[aria-disabled="true"] { background: #E8E0D6; border-color: #E8E0D6; color: #5E5468; cursor: not-allowed; }
+  .note { background: var(--card); border-left: 6px solid var(--rust); border-radius: 10px; padding: 14px 16px; margin-top: 28px; font-size: 16px; }
+  footer { margin-top: 36px; font-size: 14px; color: #5E5468; }
+  nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  nav a { color: #FBF6EF; border: 2px solid #6B5780; border-radius: 999px; padding: 8px 16px; font-size: 16px; font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+  nav a:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; }
+  .intro { font-size: 18px; max-width: 720px; margin: 0 0 16px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; }
+  summary { cursor: pointer; padding: 14px 16px; font-weight: 700; color: var(--plum); font-size: 18px; min-height: 44px; }
+  summary:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; border-radius: 14px; }
+  details .body { padding: 0 16px 14px; font-size: 16px; }
+  details .body p { margin: 0 0 8px; }
+  .label { font-weight: 700; color: var(--teal); }
+  .examples { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .ex { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .ex .verdict { display: inline-block; font-size: 13px; font-weight: 700; color: #fff; border-radius: 999px; padding: 3px 10px; margin-bottom: 8px; }
+  .ex.ok .verdict { background: var(--teal); }
+  .ex.no .verdict { background: var(--rust); }
+  .ex code { display: block; background: var(--sand); border-radius: 8px; padding: 10px 12px; font-family: Consolas, Menlo, monospace; font-size: 15px; color: var(--plum); overflow-wrap: anywhere; margin-bottom: 8px; }
+  .ex p { margin: 0; font-size: 15px; }
+  .checker { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .checker textarea { width: 100%; min-height: 96px; font-size: 17px; font-family: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; color: var(--plum); background: #fff; resize: vertical; }
+  .checker textarea:focus { outline: 3px solid #F4B393; border-color: var(--rust); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .chip { min-height: 44px; border: 2px solid var(--teal); background: transparent; color: var(--teal); border-radius: 999px; padding: 0 14px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  .chip:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; }
+  #results { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+  #results li { border-radius: 10px; padding: 10px 12px; font-size: 16px; background: var(--sand); }
+  #results li b { margin-right: 6px; }
+  #results li.good b { color: var(--teal); }
+  #results li.fix b { color: var(--rust); }
+  .small { font-size: 14px; margin: 10px 0 0; }
+  ol.flow { margin: 0; padding-left: 22px; font-size: 17px; }
+  ol.flow li { margin-bottom: 6px; }
+  .tick { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; font-size: 16px; cursor: pointer; min-height: 44px; }
+  .tick input { width: 24px; height: 24px; flex: none; margin-top: 2px; accent-color: var(--teal); }
+  #ready { margin-top: 10px; font-weight: 700; font-size: 18px; color: var(--plum); min-height: 28px; }
+  @media (max-width: 520px) { h1 { font-size: 32px; } header { padding: 28px 0 26px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">GRIT &middot; Zuzi</p>
+    <h1>Teach Zuzi forms</h1>
+    <p class="lead">Find the form that fits the person you are working with. Open it, copy the link, or send it on WhatsApp.</p>
+    <nav aria-label="Sections">
+      <a href="#forms-title">The forms</a>
+      <a href="#accepted">Get it accepted first time</a>
+      <a href="#checker">Check a line</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h2>Before you hand out a form</h2>
+  <ul class="steps">
+    <li><b>Check the group.</b> Give each person only the form for their group.</li>
+    <li><b>Two codes.</b> Your champion code, and a writer code for each person.</li>
+    <li><b>English in brackets.</b> After each message: (what it means in English).</li>
+    <li><b>No tools.</b> No translation or AI tools. Write the way you really type.</li>
+  </ul>
+
+  <div class="codebox">
+    <label for="code">Your champion code (optional)</label>
+    <input id="code" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="for example CH-03" maxlength="20">
+    <p>Type it once and the forms that support it will open with your code already filled in. It stays on this phone only.</p>
+  </div>
+
+  <h2 id="forms-title">The forms</h2>
+  <div class="grid" id="forms"></div>
+
+  <h2 id="accepted">Get it accepted first time</h2>
+  <p class="intro">Every message is read by a person at GRIT. When something cannot be used, the writer has to fill in that story again. These are the reasons that happen most, and how to avoid each one.</p>
+
+  <details>
+    <summary>1. English meaning missing</summary>
+    <div class="body">
+      <p><span class="label">Why it happens:</span> the brackets were forgotten, or the English was written somewhere else.</p>
+      <p><span class="label">How to avoid it:</span> after every message, type an opening bracket, the meaning in English, and a closing bracket. Look at each line before pressing send.</p>
+    </div>
+  </details>
+  <details>
+    <summary>2. English meaning unclear or wrong</summary>
+    <div class="body">
+      <p><span class="label">Why it happens:</span> the meaning is one word, such as (help), or it does not match what was written.</p>
+      <p><span class="label">How to avoid it:</span> write a full, simple sentence in English, as if you were explaining it to a friend who does not speak your language.</p>
+    </div>
+  </details>
+  <details>
+    <summary>3. Looks machine translated or copied</summary>
+    <div class="body">
+      <p><span class="label">Why it happens:</span> a translation tool or AI was used, or the text was copied from a friend or from an earlier answer.</p>
+      <p><span class="label">How to avoid it:</span> type it yourself, in your own words. Informal and short is fine. Neat and perfect is what looks suspicious.</p>
+    </div>
+  </details>
+  <details>
+    <summary>4. Not written in the language you chose</summary>
+    <div class="body">
+      <p><span class="label">Why it happens:</span> the language chosen at the top of the form is not the language of the messages.</p>
+      <p><span class="label">How to avoid it:</span> check the language question before the writer starts. If they mix languages when they type, that is fine, and the form has a question for it. The main language should still be the one chosen.</p>
+    </div>
+  </details>
+  <details>
+    <summary>5. Contains personal details</summary>
+    <div class="body">
+      <p><span class="label">Why it happens:</span> a real name, phone number or address was written in a message.</p>
+      <p><span class="label">How to avoid it:</span> leave them out. Write &ldquo;my friend&rdquo;, &ldquo;my partner&rdquo; or &ldquo;my teacher&rdquo; instead of a name, and never write a real phone number or address.</p>
+    </div>
+  </details>
+  <details>
+    <summary>6. Same as another answer</summary>
+    <div class="body">
+      <p><span class="label">Why it happens:</span> the same message was used for two stories, or writers copied each other, or a form was sent twice.</p>
+      <p><span class="label">How to avoid it:</span> each writer writes their own answers on their own. Send the form once. If we ask for a story again, redo only the stories we list.</p>
+    </div>
+  </details>
+  <details>
+    <summary>7. Too short to be useful</summary>
+    <div class="body">
+      <p><span class="label">Why it happens:</span> the message is something like &ldquo;hi&rdquo; or &ldquo;ok&rdquo;, or only an emoji, so there is nothing to learn from.</p>
+      <p><span class="label">How to avoid it:</span> short is fine, a few words can be a real message. Ask the writer: what would you really send to Zuzi?</p>
+    </div>
+  </details>
+  <details>
+    <summary>8. Other</summary>
+    <div class="body">
+      <p>We add a short note to the email. Read it, and reply to the email if it is not clear.</p>
+    </div>
+  </details>
+
+  <h2>Examples</h2>
+  <p class="intro">These use English words so everyone can follow them. In your own language the format is the same: the message first, then the English meaning in round brackets.</p>
+  <div class="examples">
+    <div class="ex ok">
+      <span class="verdict">Accepted</span>
+      <code>hey wat time does the clinic open (What time does the clinic open?)</code>
+      <p>The message is typed the way a person really types it, and the meaning is a clear sentence.</p>
+    </div>
+    <div class="ex no">
+      <span class="verdict">Comes back: English meaning missing</span>
+      <code>hey wat time does the clinic open</code>
+      <p>There are no brackets, so we cannot tell what it means in English.</p>
+    </div>
+    <div class="ex no">
+      <span class="verdict">Comes back: meaning unclear</span>
+      <code>hey wat time does the clinic open (question)</code>
+      <p>One word does not say what the message means.</p>
+    </div>
+    <div class="ex no">
+      <span class="verdict">Comes back: personal details</span>
+      <code>my friend Sipho said call him on 012 345 6789 (my friend Sipho said call him)</code>
+      <p>Real names and numbers must stay out. Write &ldquo;my friend said call him&rdquo;.</p>
+    </div>
+  </div>
+
+  <h2 id="checker">Check a line before it is sent</h2>
+  <div class="checker">
+    <label for="line"><b>Type or paste one line, the way it will go on the form.</b></label>
+    <textarea id="line" placeholder="message (what it means in English)"></textarea>
+    <div class="chips" aria-label="Try an example">
+      <button class="chip" type="button" data-ex="hey wat time does the clinic open (What time does the clinic open?)">Try a good one</button>
+      <button class="chip" type="button" data-ex="hey wat time does the clinic open">Try one with no meaning</button>
+      <button class="chip" type="button" data-ex="hey wat time does the clinic open (question)">Try a very short meaning</button>
+    </div>
+    <ul id="results" aria-live="polite"></ul>
+    <p class="small">This check runs on your phone and nothing is sent or saved anywhere. It only looks at the layout, not the language. Please practise with made-up examples, not a real person&rsquo;s private words. For an English-language form, no brackets are needed.</p>
+  </div>
+
+  <h2>Before the writer presses send</h2>
+  <label class="tick"><input type="checkbox" class="chk"> <span>They chose the right language, and typed the right champion code and their own writer code.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>Every message has its English meaning in round brackets at the end of the same line.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>Each meaning is a clear, simple sentence in their own words.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>They wrote everything themselves, with no translation or AI tool, and no copying.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>There are no real names, phone numbers or addresses.</span></label>
+  <label class="tick"><input type="checkbox" class="chk"> <span>They have only sent this form once.</span></label>
+  <div id="ready" aria-live="polite"></div>
+
+  <h2>Tips from the champions who get it right</h2>
+  <ol class="flow">
+    <li>Sit with the writer for the first story, or message them, and check the first two answers together before they carry on.</li>
+    <li>Tell them it is fine to type messy, short and mixed. We want real messages.</li>
+    <li>Keep your own private list of which writer has which code.</li>
+    <li>If an email comes back with stories listed, redo only those stories, with the same writer code.</li>
+  </ol>
+
+  <div class="note"><b>Care.</b> Writers can skip any story and stop at any time. If someone tells you they are in danger or have been hurt, stop the form and speak to your GRIT contact straight away.</div>
+
+  <footer>Questions? Ask your GRIT contact. Please do not post this page publicly.</footer>
+</main>
+
+<script>
+/* ===== EDIT THIS LIST =====
+   name   : the heading on the card
+   who    : one short line about who the form is for
+   url    : the form's web address (the one that ends in /viewform). Leave "" until the form is ready: the card then says "Coming soon".
+   under18: true for the 12 to 18 forms (adds an "Under 18" label)
+   codeField : optional. The "entry.123456789" part from the form's pre-filled link, so the champion code can be filled in for the champion.
+               In the form: three dots menu > Get pre-filled link > type any text in the champion code question > Get link > Copy link.
+               The number after "entry." in that link is what goes here, for example "entry.123456789".
+*/
+var FORMS = [
+  { name: "Women 18 to 35", who: "Short stories to answer in your own language, written for women aged 18 to 35.", url: "", under18: false, codeField: "" },
+  { name: "Men", who: "Short stories to answer in your own language, written for men.", url: "", under18: false, codeField: "" },
+  { name: "Girls 12 to 18", who: "Short stories to answer in your own language, written for girls aged 12 to 18. Follow GRIT's consent steps before a girl starts.", url: "", under18: true, codeField: "" },
+  { name: "Boys 12 to 18", who: "Short stories to answer in your own language, written for boys aged 12 to 18. Follow GRIT's consent steps before a boy starts.", url: "", under18: true, codeField: "" },
+  { name: "LGBTIQ+ 18 to 35", who: "Short stories to answer in your own language, written for LGBTIQ+ people aged 18 to 35.", url: "", under18: false, codeField: "" },
+  { name: "LGBTIQ+ young people 12 to 18", who: "Short stories to answer in your own language, written for LGBTIQ+ young people aged 12 to 18. Follow GRIT's consent steps before they start.", url: "", under18: true, codeField: "" },
+  { name: "Sex workers", who: "Short stories to answer in your own language, written for sex workers.", url: "", under18: false, codeField: "" },
+  { name: "People from other countries", who: "Short stories to answer in your own language, written for people living in South Africa who come from other countries.", url: "", under18: false, codeField: "" }
+];
+/* ===== END OF LIST ===== */
+
+var codeInput = document.getElementById('code');
+var holder = document.getElementById('forms');
+
+function readSaved() { try { return localStorage.getItem('zuziChampionCode') || ''; } catch (e) { return ''; } }
+function save(v) { try { localStorage.setItem('zuziChampionCode', v); } catch (e) { /* private mode: fine */ } }
+
+function linkFor(f) {
+  if (!f.url) return '';
+  var code = codeInput.value.trim();
+  if (!code || !f.codeField) return f.url;
+  try {
+    var u = new URL(f.url);
+    u.searchParams.set('usp', 'pp_url');
+    u.searchParams.set(f.codeField, code);
+    return u.toString();
+  } catch (e) { return f.url; }
+}
+
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+
+function copyText(text, btn) {
+  var done = function () { var old = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = old; }, 1500); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+  } else { fallbackCopy(text, done); }
+}
+function fallbackCopy(text, done) {
+  var t = document.createElement('textarea');
+  t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+  document.body.appendChild(t); t.select();
+  try { document.execCommand('copy'); done(); } catch (e) { /* nothing more to do */ }
+  document.body.removeChild(t);
+}
+
+function render() {
+  holder.textContent = '';
+  FORMS.forEach(function (f) {
+    var link = linkFor(f);
+    var card = el('div', 'card');
+    if (!f.url) card.appendChild(el('span', 'tag soon', 'Coming soon'));
+    else if (f.under18) card.appendChild(el('span', 'tag', 'Under 18'));
+    card.appendChild(el('h3', '', f.name));
+    card.appendChild(el('p', '', f.who));
+    var actions = el('div', 'actions');
+    if (link) {
+      var open = el('a', 'btn primary', 'Open the form');
+      open.href = link; open.target = '_blank'; open.rel = 'noopener';
+      var copy = el('button', 'btn secondary', 'Copy link');
+      copy.type = 'button';
+      copy.addEventListener('click', function () { copyText(linkFor(f), copy); });
+      var wa = el('a', 'btn secondary', 'WhatsApp');
+      wa.href = 'https://wa.me/?text=' + encodeURIComponent('Zuzi form for ' + f.name + ': ' + link);
+      wa.target = '_blank'; wa.rel = 'noopener';
+      actions.appendChild(open); actions.appendChild(copy); actions.appendChild(wa);
+    } else {
+      var off = el('span', 'btn primary', 'Link coming soon');
+      off.setAttribute('aria-disabled', 'true');
+      actions.appendChild(off);
+    }
+    card.appendChild(actions);
+    holder.appendChild(card);
+  });
+}
+
+/* ---- line checker: runs in the browser only ---- */
+var lineBox = document.getElementById('line');
+var resultsEl = document.getElementById('results');
+function words(s) { return String(s).split(/\s+/).filter(function (w) { return w; }); }
+function norm(s) { return String(s).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim(); }
+
+function checkLine(raw) {
+  var s = String(raw).trim(), res = [];
+  if (!s) return res;
+  var message = '', meaning = '', m, found = false;
+  if ((m = s.match(/^([\s\S]*?\S)\s*[(\[{]\s*([^()\[\]{}]*?)\s*[)\]}]\s*[\s.!?…]*$/))) {
+    message = m[1].trim(); meaning = m[2].trim(); found = true;
+    if (!meaning) { res.push({ ok: false, text: 'The brackets are empty. Write the English meaning between them.' }); found = false; }
+  } else if ((m = s.match(/^\s*[(\[{]([^()\[\]{}]+)[)\]}]\s*([\s\S]*\S)\s*$/))) {
+    res.push({ ok: false, text: 'The English meaning is at the start. Put your message first, then the English meaning in brackets after it.' });
+    return res;
+  } else if ((m = s.match(/^([\s\S]*?\S)\s*[(\[{]\s*([^()\[\]{}]+)$/))) {
+    message = m[1].trim(); meaning = m[2].trim();
+    res.push({ ok: false, text: 'You opened a bracket but did not close it. Add a closing bracket at the end.' });
+  } else {
+    res.push({ ok: false, text: 'No English meaning found. After your message, add the English meaning in round brackets.' });
+  }
+  if (message && meaning) {
+    if (norm(message) === norm(meaning)) res.push({ ok: false, text: 'The meaning is the same as the message. Explain it in simple English.' });
+    else if (words(meaning).length < 2 && words(message).length >= 4) res.push({ ok: false, text: 'The meaning is very short. Write a full, simple sentence.' });
+  }
+  if (/(?:\+?27|\b0)[\s-]?\d{2}[\s-]?\d{3}[\s-]?\d{4}\b|\d{9,}|\S+@\S+\.\S+/.test(s)) {
+    res.push({ ok: false, text: 'This looks like a phone number or email address. Leave personal details out.' });
+  }
+  if (!res.length) res.push({ ok: true, text: 'The layout looks good: a message and its English meaning were both found.' });
+  return res;
+}
+
+function showChecks() {
+  resultsEl.textContent = '';
+  checkLine(lineBox.value).forEach(function (r) {
+    var li = document.createElement('li');
+    li.className = r.ok ? 'good' : 'fix';
+    var b = document.createElement('b'); b.textContent = r.ok ? 'Good:' : 'Fix:';
+    li.appendChild(b); li.appendChild(document.createTextNode(r.text));
+    resultsEl.appendChild(li);
+  });
+}
+lineBox.addEventListener('input', showChecks);
+Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (chip) {
+  chip.addEventListener('click', function () { lineBox.value = chip.getAttribute('data-ex'); showChecks(); });
+});
+
+/* ---- tick list ---- */
+var ticks = document.querySelectorAll('.chk'), readyEl = document.getElementById('ready');
+function updateReady() {
+  var all = true;
+  Array.prototype.forEach.call(ticks, function (t) { if (!t.checked) all = false; });
+  readyEl.textContent = all ? 'All six ticked. The form is ready to send.' : '';
+}
+Array.prototype.forEach.call(ticks, function (t) { t.addEventListener('change', updateReady); });
+
+codeInput.value = readSaved();
+codeInput.addEventListener('input', function () { save(codeInput.value.trim()); render(); });
+render();
+</script>
+</body>
+</html>
