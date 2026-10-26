@@ -4,20 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Teach Zuzi forms</title>
+<title>Teach Zuzi forms | GRIT</title>
+<meta name="theme-color" content="#01040c">
+<link rel="icon" href="grit-logo.png" type="image/png">
 <style>
   :root {
-    --plum: #2B1D3A; --cream: #FBF6EF; --sand: #F1E7DA; --rust: #A63A19; --teal: #1F6F6A;
-    --text: #4A3F57; --card: #FFFDF9; --line: #E3D6C6;
+    --plum: #0B1B3F; --cream: #F3F7F9; --sand: #E3EEF2; --rust: #4B3FA0; --teal: #0F4971;
+    --text: #33415C; --card: #FCFEFF; --line: #D5E1E8; --warn: #B3261E; --night: #01040c;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--cream); color: var(--text); font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; }
   .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px 48px; }
-  header { background: var(--plum); color: #F3ECF7; padding: 40px 0 36px; }
+  header { background: var(--night); color: #E6EEF5; padding: 32px 0 30px; }
+  .brand { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .logo { width: 112px; height: 112px; flex: none; }
+  .brand-text { flex: 1 1 260px; }
   header .wrap { padding-bottom: 0; }
-  .eyebrow { margin: 0 0 8px; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #F4B393; }
-  h1 { margin: 0 0 12px; font-size: 40px; line-height: 1.1; color: #FBF6EF; }
-  header p.lead { margin: 0; font-size: 18px; max-width: 640px; color: #D9CCE3; }
+  .eyebrow { margin: 0 0 8px; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7CC4DA; }
+  h1 { margin: 0 0 12px; font-size: 40px; line-height: 1.1; color: #FFFFFF; }
+  header p.lead { margin: 0; font-size: 18px; max-width: 640px; color: #B9C9D8; }
   h2 { font-size: 24px; line-height: 1.2; color: var(--plum); margin: 36px 0 14px; }
   .steps { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin: 0; padding: 0; list-style: none; }
   .steps li { background: var(--sand); border-radius: 14px; padding: 14px 16px; font-size: 16px; }
@@ -25,29 +30,29 @@
   .codebox { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 16px; }
   .codebox label { display: block; font-weight: 700; color: var(--plum); margin-bottom: 6px; }
   .codebox input { width: 100%; max-width: 280px; font-size: 18px; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; background: #fff; color: var(--plum); }
-  .codebox input:focus { outline: 3px solid #F4B393; border-color: var(--rust); }
+  .codebox input:focus { outline: 3px solid #7CC4DA; border-color: var(--rust); }
   .codebox p { margin: 8px 0 0; font-size: 14px; }
   .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
   .card h3 { margin: 0; font-size: 22px; line-height: 1.2; color: var(--plum); }
   .card p { margin: 0; font-size: 16px; }
   .tag { align-self: flex-start; font-size: 13px; font-weight: 700; color: #fff; background: var(--rust); border-radius: 999px; padding: 3px 10px; }
-  .tag.soon { background: #6B5780; }
+  .tag.soon { background: #3E5878; }
   .actions { margin-top: auto; padding-top: 6px; display: flex; flex-wrap: wrap; gap: 8px; }
   .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border-radius: 12px; font-size: 16px; font-weight: 700; text-decoration: none; border: 2px solid var(--teal); cursor: pointer; font-family: inherit; }
   .btn.primary { background: var(--teal); color: #fff; flex: 1 1 100%; }
   .btn.secondary { background: transparent; color: var(--teal); flex: 1 1 auto; }
-  .btn:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; }
-  .btn[aria-disabled="true"] { background: #E8E0D6; border-color: #E8E0D6; color: #5E5468; cursor: not-allowed; }
+  .btn:focus-visible { outline: 3px solid #7CC4DA; outline-offset: 2px; }
+  .btn[aria-disabled="true"] { background: #DCE6EC; border-color: #DCE6EC; color: #4A5A6E; cursor: not-allowed; }
   .note { background: var(--card); border-left: 6px solid var(--rust); border-radius: 10px; padding: 14px 16px; margin-top: 28px; font-size: 16px; }
-  footer { margin-top: 36px; font-size: 14px; color: #5E5468; }
+  footer { margin-top: 36px; font-size: 14px; color: #4A5A6E; }
   nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-  nav a { color: #FBF6EF; border: 2px solid #6B5780; border-radius: 999px; padding: 8px 16px; font-size: 16px; font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
-  nav a:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; }
+  nav a { color: #F4F8FB; border: 2px solid #3E5878; border-radius: 999px; padding: 8px 16px; font-size: 16px; font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+  nav a:focus-visible { outline: 3px solid #7CC4DA; outline-offset: 2px; }
   .intro { font-size: 18px; max-width: 720px; margin: 0 0 16px; }
   details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; }
   summary { cursor: pointer; padding: 14px 16px; font-weight: 700; color: var(--plum); font-size: 18px; min-height: 44px; }
-  summary:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; border-radius: 14px; }
+  summary:focus-visible { outline: 3px solid #7CC4DA; outline-offset: 2px; border-radius: 14px; }
   details .body { padding: 0 16px 14px; font-size: 16px; }
   details .body p { margin: 0 0 8px; }
   .label { font-weight: 700; color: var(--teal); }
@@ -55,35 +60,40 @@
   .ex { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
   .ex .verdict { display: inline-block; font-size: 13px; font-weight: 700; color: #fff; border-radius: 999px; padding: 3px 10px; margin-bottom: 8px; }
   .ex.ok .verdict { background: var(--teal); }
-  .ex.no .verdict { background: var(--rust); }
+  .ex.no .verdict { background: var(--warn); }
   .ex code { display: block; background: var(--sand); border-radius: 8px; padding: 10px 12px; font-family: Consolas, Menlo, monospace; font-size: 15px; color: var(--plum); overflow-wrap: anywhere; margin-bottom: 8px; }
   .ex p { margin: 0; font-size: 15px; }
   .checker { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
   .checker textarea { width: 100%; min-height: 96px; font-size: 17px; font-family: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; color: var(--plum); background: #fff; resize: vertical; }
-  .checker textarea:focus { outline: 3px solid #F4B393; border-color: var(--rust); }
+  .checker textarea:focus { outline: 3px solid #7CC4DA; border-color: var(--rust); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
   .chip { min-height: 44px; border: 2px solid var(--teal); background: transparent; color: var(--teal); border-radius: 999px; padding: 0 14px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
-  .chip:focus-visible { outline: 3px solid #F4B393; outline-offset: 2px; }
+  .chip:focus-visible { outline: 3px solid #7CC4DA; outline-offset: 2px; }
   #results { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
   #results li { border-radius: 10px; padding: 10px 12px; font-size: 16px; background: var(--sand); }
   #results li b { margin-right: 6px; }
   #results li.good b { color: var(--teal); }
-  #results li.fix b { color: var(--rust); }
+  #results li.fix b { color: var(--warn); }
   .small { font-size: 14px; margin: 10px 0 0; }
   ol.flow { margin: 0; padding-left: 22px; font-size: 17px; }
   ol.flow li { margin-bottom: 6px; }
   .tick { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; font-size: 16px; cursor: pointer; min-height: 44px; }
   .tick input { width: 24px; height: 24px; flex: none; margin-top: 2px; accent-color: var(--teal); }
   #ready { margin-top: 10px; font-weight: 700; font-size: 18px; color: var(--plum); min-height: 28px; }
-  @media (max-width: 520px) { h1 { font-size: 32px; } header { padding: 28px 0 26px; } }
+  @media (max-width: 520px) { h1 { font-size: 32px; } header { padding: 24px 0 22px; } .logo { width: 88px; height: 88px; } }
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <p class="eyebrow">GRIT &middot; Zuzi</p>
-    <h1>Teach Zuzi forms</h1>
-    <p class="lead">Find the form that fits the person you are working with. Open it, copy the link, or send it on WhatsApp.</p>
+    <div class="brand">
+      <img class="logo" src="grit-logo.png" width="112" height="112" alt="GRIT, Gender Rights in Tech">
+      <div class="brand-text">
+        <p class="eyebrow">Gender Rights in Tech &middot; Zuzi</p>
+        <h1>Teach Zuzi forms</h1>
+        <p class="lead">Find the form that fits the person you are working with. Open it, copy the link, or send it on WhatsApp.</p>
+      </div>
+    </div>
     <nav aria-label="Sections">
       <a href="#forms-title">The forms</a>
       <a href="#accepted">Get it accepted first time</a>
@@ -226,7 +236,7 @@
 
   <div class="note"><b>Care.</b> Writers can skip any story and stop at any time. If someone tells you they are in danger or have been hurt, stop the form and speak to your GRIT contact straight away.</div>
 
-  <footer>Questions? Ask your GRIT contact. Please do not post this page publicly.</footer>
+  <footer>A GRIT (Gender Rights in Tech) project. Questions? Ask your GRIT contact. Please do not post this page publicly.</footer>
 </main>
 
 <script>
