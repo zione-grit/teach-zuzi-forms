@@ -46,9 +46,23 @@
   .btn[aria-disabled="true"] { background: #DCE6EC; border-color: #DCE6EC; color: #4A5A6E; cursor: not-allowed; }
   .note { background: var(--card); border-left: 6px solid var(--rust); border-radius: 10px; padding: 14px 16px; margin-top: 28px; font-size: 16px; }
   footer { margin-top: 36px; font-size: 14px; color: #4A5A6E; }
-  nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-  nav a { color: #F4F8FB; border: 2px solid #3E5878; border-radius: 999px; padding: 8px 16px; font-size: 16px; font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
-  nav a:focus-visible { outline: 3px solid #7CC4DA; outline-offset: 2px; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { overflow-x: hidden; }
+  img { max-width: 100%; height: auto; }
+  .tabs { position: sticky; top: 0; z-index: 10; background: rgba(1,4,12,.96); border-bottom: 1px solid #1B2A44; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .tabs .wrap { padding-bottom: 0; }
+  .tabs ul { display: flex; gap: 6px; list-style: none; margin: 0; padding: 8px 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs ul::-webkit-scrollbar { display: none; }
+  .tabs li { flex: 1 1 auto; }
+  .tabs a { display: flex; align-items: center; justify-content: center; text-align: center; gap: 8px; min-height: 46px; padding: 0 16px; border-radius: 12px; color: #B9C9D8; font-size: 16px; font-weight: 700; text-decoration: none; white-space: nowrap; border: 2px solid transparent;  }
+  .tabs a svg { width: 20px; height: 20px; flex: none; }
+  .tabs a:hover { background: #10203C; color: #fff; }
+  .tabs a.active { background: #fff; color: var(--plum); }
+  .tabs a:focus-visible { outline: 3px solid #7CC4DA; outline-offset: 2px; }
+  .tabs .short { display: none; }
+  @media (max-width: 480px) { .tabs .full { display: none; } .tabs .short { display: inline; } }
+  #forms-title, #accepted, #checker { scroll-margin-top: 80px; }
   .intro { font-size: 18px; max-width: 720px; margin: 0 0 16px; }
   details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; }
   summary { cursor: pointer; padding: 14px 16px; font-weight: 700; color: var(--plum); font-size: 18px; min-height: 44px; }
@@ -80,6 +94,11 @@
   .tick { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; font-size: 16px; cursor: pointer; min-height: 44px; }
   .tick input { width: 24px; height: 24px; flex: none; margin-top: 2px; accent-color: var(--teal); }
   #ready { margin-top: 10px; font-weight: 700; font-size: 18px; color: var(--plum); min-height: 28px; }
+  @media (min-width: 1100px) { .wrap { max-width: 1120px; } .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 640px) and (max-width: 1099px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 639px) { .grid { grid-template-columns: 1fr; } .tabs a { padding: 0 12px; font-size: 15px; } .tabs a svg { display: none; } .tabs ul { gap: 4px; } }
+  @media (max-width: 380px) { h2 { font-size: 21px; } .card { padding: 16px; } .tabs a { padding: 0 8px; font-size: 14px; } .btn { padding: 0 12px; } }
+  @supports (padding: max(0px)) { .wrap { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); } }
   @media (max-width: 520px) { h1 { font-size: 32px; } header { padding: 24px 0 22px; } .logo { width: 88px; height: 88px; } }
 </style>
 </head>
@@ -94,13 +113,17 @@
         <p class="lead">Find the form that fits the person you are working with. Open it, copy the link, or send it on WhatsApp.</p>
       </div>
     </div>
-    <nav aria-label="Sections">
-      <a href="#forms-title">The forms</a>
-      <a href="#accepted">Get it accepted first time</a>
-      <a href="#checker">Check a line</a>
-    </nav>
   </div>
 </header>
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap">
+    <ul>
+      <li><a href="#forms-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><span class="full">The forms</span><span class="short">Forms</span></a></li>
+      <li><a href="#accepted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span class="full">Get it accepted</span><span class="short">Accepted</span></a></li>
+      <li><a href="#checker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span class="full">Check a line</span><span class="short">Check</span></a></li>
+    </ul>
+  </div>
+</nav>
 
 <main class="wrap">
   <h2>Before you hand out a form</h2>
@@ -390,6 +413,17 @@ Array.prototype.forEach.call(ticks, function (t) { t.addEventListener('change', 
 codeInput.value = readSaved();
 codeInput.addEventListener('input', function () { save(codeInput.value.trim()); render(); });
 render();
+
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.tabs a'));
+  var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  function mark() {
+    var y = window.scrollY + 120, cur = -1;
+    targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top + window.scrollY <= y) cur = i; });
+    links.forEach(function (a, i) { a.classList.toggle('active', i === cur); if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('scroll', mark, { passive: true }); window.addEventListener('resize', mark); mark();
+})();
 </script>
 </body>
 </html>
